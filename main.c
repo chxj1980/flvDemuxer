@@ -28,7 +28,7 @@ int main()
   //  releaseSource();
 
   printf("begin write h.264\n");
-  //  DEMUX_writeH264(&flvContext);
+  DEMUX_writeH264(&flvContext);
   
   main_close();
   return 0;

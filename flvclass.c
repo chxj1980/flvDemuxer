@@ -358,8 +358,8 @@ int readAVCDecoderConfigurationRecord(FILE* pFile,AVCDecoderConfigurationRecord*
   assert(pAVCDecoderConfigurationRecord->pictureParameterSetNALUnit = (uint8_t*)malloc(sizeof(uint8_t)*(ppsLength)));
   fread(pAVCDecoderConfigurationRecord->pictureParameterSetNALUnit, 1, ppsLength, pFile);
   showData(pAVCDecoderConfigurationRecord->pictureParameterSetNALUnit,ppsLength);
-    free(pAVCDecoderConfigurationRecord->pictureParameterSetNALUnit);
-    free(pAVCDecoderConfigurationRecord->sequenceParameterSetNALUnit);
+  //free(pAVCDecoderConfigurationRecord->pictureParameterSetNALUnit);
+  //free(pAVCDecoderConfigurationRecord->sequenceParameterSetNALUnit);
   return 0;
 }
 int readAvcData(FILE*pFile,AvcEsDataPos* pAvcEsDataPos,int avcEsDataPosSize)
@@ -368,7 +368,7 @@ int readAvcData(FILE*pFile,AvcEsDataPos* pAvcEsDataPos,int avcEsDataPosSize)
   pAvcEsDataPos->size = avcEsDataPosSize;
   return 0;
 }
-#define TempDataSize 50000
+#define TempDataSize 60000
 uint8_t tempData[TempDataSize];
 int showAvcData(AvcEsDataPos* pAvcEsDataPos)
 {
