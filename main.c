@@ -2,8 +2,6 @@
 #include"fileclass.h"
 #include"flvclass.h"
 
-#define INPUTFILENAME "test1.flv"
-#define OUTPUTFILENAME "test1_h264.h264"
 
 //* init some global variable
 FLVContext flvContext;

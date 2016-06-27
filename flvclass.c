@@ -373,11 +373,12 @@ uint8_t tempData[TempDataSize];
 int showAvcData(AvcEsDataPos* pAvcEsDataPos)
 {
   FILE* tempFile;
-  tempFile = fopen("test1.flv", "rb");
+  tempFile = fopen(INPUTFILENAME, "rb");
   fseek(tempFile, pAvcEsDataPos->startPos, SEEK_SET);
 
   assert(pAvcEsDataPos->size<TempDataSize);
   fread(tempData, 1, pAvcEsDataPos->size, tempFile);
+  printf("line=%d,pAvcEsDataPos->startPos=%ld,pAvcEsDataPos->size=%ld\n",__LINE__,pAvcEsDataPos->startPos, pAvcEsDataPos->size);
   int i;
     for(i=0;i<pAvcEsDataPos->size;i++)
   //  for(i=0;i<10;i++)
@@ -386,7 +387,6 @@ int showAvcData(AvcEsDataPos* pAvcEsDataPos)
     }
   printf("\n");
   fclose(tempFile);
-  printf("line=%d,pAvcEsDataPos->size=%ld\n",__LINE__, pAvcEsDataPos->size);
   return 0;
 }
 int readAvcVideoPacket(FILE* pFile,AvcVideoPacket*pAvcVideoPacket,int avcEsDataPosSize)
@@ -407,7 +407,7 @@ int readAvcVideoPacket(FILE* pFile,AvcVideoPacket*pAvcVideoPacket,int avcEsDataP
       AvcEsDataPos* pAvcEsDataPos;
       pAvcEsDataPos = &pAvcVideoPacket->avcVideoPacketContent.avcEsDataPos;
       readAvcData(pFile,pAvcEsDataPos,avcEsDataPosSize);
-      //showAvcData(pAvcEsDataPos);
+//      showAvcData(pAvcEsDataPos);
     }
       break;
     case 2:
@@ -539,7 +539,7 @@ int writeAvcData(FLVContext* pflvContext, Tag* tag)
   AvcEsDataPos* pAvcEsDataPos;
   pAvcEsDataPos= &tag->tagBody.videoData.avcVideoPacket.avcVideoPacketContent.avcEsDataPos;
   FILE* tempFile;
-  tempFile = fopen("test1.flv", "rb");
+  tempFile = fopen(INPUTFILENAME, "rb");
   fseek(tempFile, pAvcEsDataPos->startPos, SEEK_SET);
   printf("pAvcEsDataPos->size=%ld\n", pAvcEsDataPos->size);
   assert(pAvcEsDataPos->size<TempDataSize);
