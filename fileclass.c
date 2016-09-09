@@ -1,10 +1,19 @@
 #include"fileclass.h"
 #include<stdio.h>
+#include<assert.h>
 
 int initFile(FileContext* pfileContext,char*inputFileName,char*outputFileName)
 {
   pfileContext->inputFile = fopen(inputFileName,"rb");
+  if(pfileContext->inputFile == NULL)
+  {
+	  assert(0);
+  }
   pfileContext->outputFile_h264 = fopen(outputFileName,"wb");
+  if(pfileContext->outputFile_h264== NULL)
+  {
+	  assert(0);
+  }
   return 0;
 }
 
